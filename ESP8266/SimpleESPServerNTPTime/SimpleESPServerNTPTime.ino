@@ -1,10 +1,10 @@
-#include <Servo.h>
-
 #include "ESPWebServer.h"
 #include "NTPTimeRequester.h"
 
 // the server
-ESPWebServer espServer("CyFi", "batman11");
+const char * ssid = ""; // SSID goes here
+const char * password = ""; // WiFi password goes here
+ESPWebServer espServer(ssid, password);
 
 // time
 NTPTimeRequester ntpRequester;
