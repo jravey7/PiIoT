@@ -1,7 +1,8 @@
 #include "ESPWebServer.h"
 
-// the server
-ESPWebServer espServer("CyFi", "batman11");
+// the ESP server
+#include "WiFiCredentials.h" // put your WiFi ssid and passwords in this file
+ESPWebServer espServer(wiFiSSID, wiFiPassword);
 
 // Assign output variable to GPIO pins
 const int gpio2Pin = 2;

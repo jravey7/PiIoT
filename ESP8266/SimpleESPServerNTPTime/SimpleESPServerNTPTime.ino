@@ -1,10 +1,9 @@
 #include "ESPWebServer.h"
 #include "NTPTimeRequester.h"
 
-// the server
-const char * ssid = ""; // SSID goes here
-const char * password = ""; // WiFi password goes here
-ESPWebServer espServer(ssid, password);
+// the ESP server
+#include "WiFiCredentials.h" // put your WiFi ssid and passwords in this file
+ESPWebServer espServer(wiFiSSID, wiFiPassword);
 
 // time
 NTPTimeRequester ntpRequester;
