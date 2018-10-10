@@ -1,1 +1,5 @@
 WiFiCredentials.h
+*.class
+*.o
+*.exe
+*.bin
