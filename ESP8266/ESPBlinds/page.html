@@ -54,34 +54,6 @@
 </style>
 <!-- end CSS -->
 
-<!-- //// javascript -->
-<script>
-  var slider = document.getElementById("servoRange");
-  var textOutput = document.getElementById("degreeText");
-  var setOpenBlindsHRef = document.getElementById("setOpenBlinds");
-  var setCloseBlindsHRef = document.getElementById("setCloseBlinds");
-  textOutput.innerHTML = slider.value;
-
-  slider.oninput = function() {
-    textOutput.innerHTML = this.value;
-  }
-
-</script>
-
-<!-- javascript for submitting open/close settings -->
-<script>
-
-  function setOpenBlinds() {
-    setOpenBlindsText.innerHTML = slider.value;
-    setOpenBlindsHRef.href = '/setOpenBlinds="' + slider.value + '"';
-  }
-
-  function setCloseBlinds() {
-    setCloseBlindsText.innerHTML = slider.value;
-    setCloseBlindsHRef.href = '/setCloseBlinds="' + slider.value + '"';
-  }
-
-</script>
 </head>
 
 <!-- //// HTML -->
@@ -90,21 +62,50 @@
 
   <!-- servo slider -->
   <div class="slidecontainer">
-    <input type="range" min="0" max="200" value="0" class="slider" id="servoRange">
+    <input type="range" min="0" max="200" value="%d" class="slider" id="servoRange">
     <p>Servo degrees: <span id="degreeText"></span></p>
   </div>
 
   <!-- open blinds action button -->
   <p><a href="/openBlinds"><button class="button">Open blinds</button></a></p>
   <p><a href="#" id="setOpenBlinds" onclick="setOpenBlinds();"><button class="button">Set blinds open</button></a></p>
-  <p>Open setting: <span id="setOpenBlindsText"></span></p>
+  <p>Open setting: <span id="setOpenBlindsText">%d</span></p>
 
   <!-- close blinds action button -->
   <p><a href="/closeBlinds"><button class="button">Close blinds</button></a></p>
   <p><a href="#" id="setCloseBlinds" onclick="setCloseBlinds();"><button class="button">Set blinds closed</button></a></p>
-  <p>Close setting: <span id="setCloseBlindsText"></span></p>
+  <p>Close setting: <span id="setCloseBlindsText"></span>%d</p>
 
   <!-- formatters for the NIST time -->
   <p>Local Time (24hr): %02d:%02d:%02d</p>
+
+  <!-- //// javascript -->
+  <script>
+    var slider = document.getElementById("servoRange");
+    var textOutput = document.getElementById("degreeText");
+    var setOpenBlindsHRef = document.getElementById("setOpenBlinds");
+    var setCloseBlindsHRef = document.getElementById("setCloseBlinds");
+    textOutput.innerHTML = slider.value;
+
+    slider.oninput = function() {
+      textOutput.innerHTML = this.value;
+    }
+
+  </script>
+
+  <!-- javascript for submitting open/close settings -->
+  <script>
+
+    function setOpenBlinds() {
+      setOpenBlindsText.innerHTML = slider.value;
+      setOpenBlindsHRef.href = '/setOpenBlinds="' + slider.value + '"';
+    }
+
+    function setCloseBlinds() {
+      setCloseBlindsText.innerHTML = slider.value;
+      setCloseBlindsHRef.href = '/setCloseBlinds="' + slider.value + '"';
+    }
+
+  </script>
 
 </body></html> 

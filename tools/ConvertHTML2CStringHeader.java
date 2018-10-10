@@ -38,7 +38,7 @@ public class ConvertHTML2CStringHeader {
 
         String headerSymbol = outputFilePath.substring(0, outputFilePath.indexOf(".h")).toUpperCase();
         String headerHeader = "#ifndef " + headerSymbol +  "_H\n#define " + headerSymbol + "_H\n\n";
-        headerHeader += "// This file was built using a java tool ConvertHTML2CStringHeader (https://github.com/jravey7/PiIoT under tools folder)."
+        headerHeader += "// This file was built using a java tool ConvertHTML2CStringHeader (https://github.com/jravey7/PiIoT under tools folder).\n\n";
         String headerFooter = "\n\n#endif //" + headerSymbol + "_H";
 
         String headerContent = "const char *" + cStringVarName + "=\n\"\\\n";
@@ -46,6 +46,7 @@ public class ConvertHTML2CStringHeader {
 
         BufferedReader reader = new BufferedReader( new FileReader(inputFilePath) );
         String line;
+        int formatterCount = 0;
         while((line = reader.readLine()) != null)
         {
             for(int i = 0; i < line.length(); i++)
@@ -57,10 +58,21 @@ public class ConvertHTML2CStringHeader {
                     headerContent += '\\';
                 }
                 headerContent += c;
+
+                if(c == '%')
+                {
+                    formatterCount++;
+                }
             }
-            headerContent += "\\\n";
+            headerContent += "\\n\\\n";
         }
         headerContent += "\";";
+
+        if( formatterCount > 0)
+        {
+            // commented out. we need a better way that doesn't count intention text usage of % sign
+            //headerHeader += "// There are " + formatterCount + " sprintf formatter symbols (i.e. '%') used in the HTML\n\n";
+        }
 
         // write c-style-string to c header file
         BufferedWriter writer;
